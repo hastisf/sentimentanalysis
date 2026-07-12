@@ -223,7 +223,7 @@ slang_dict = {
     'gabukak':'tidak buka', 'gabuka':'tidak buka', 'gklogin':'tidak login',
     'gamasuk':'tidak masuk','gamasukin':'tidak masuk', 'gkbisalogin':'tidak bisa login',
     'gabisalogin':'tidak bisa login', 'ngespam':'spam', 'keblok':'blokir',
-    'keblokir':'blokir', 'diblok':'blokir', 'diblokir':'blokir', 'dilaptop':'di laptop'
+    'keblokir':'blokir', 'diblok':'blokir', 'diblokir':'blokir', 'dilaptop':'di laptop','qntl':'kontol','parahhh':'parah'
     }
 
 # --- FUNGSI PREPROCESSING LENGKAP ---
@@ -239,13 +239,20 @@ def cleaning_raw(text):
     text = re.sub(r'\s+', ' ', text).strip()
     return text
 
+def remove_repeated_characters(text):
+    # Mengubah karakter yang berulang lebih dari 2 kali menjadi 2 (contoh: "paraaah" -> "paraah")
+    # Kemudian dilakukan stemming agar "paraah" -> "parah"
+    return re.sub(r'(.)\1{2,}', r'\1', text)
+
 def get_full_pipeline(text):
     # 1. Cleaning
     s1 = cleaning_raw(text)
     # 2. Case Folding
     s2 = s1.lower()
-    # 3. Tokenization
-    s3 = s2.split()
+    # 3. Handle Repeated Characters (Baru)
+    s3_raw = remove_repeated_characters(s2)
+    # 4. Tokenization
+    s3 = s3_raw.split()
     # 4. Slang Normalization
     s4 = [slang_dict.get(w, w) for w in s3]
     # 5. Stopword Removal
@@ -279,7 +286,7 @@ with st.sidebar:
     st.info("Model ini digunakan untuk menganalisis sentimen pengguna aplikasi M-Pajak secara real-time.")
     st.markdown("- **Algoritma:** LinearSVC (Calibrated)")
     st.markdown("- **Feature Extraction:** TF-IDF Vectorizer")
-    st.markdown("- **Dataset:** 5,500 Ulasan")
+    st.markdown("- **Dataset:** 5,500 Ulasan Terbaru (Scraping Google Play Store")
     st.markdown("- **Akurasi:** 81.03%")
 
 # Main Area
