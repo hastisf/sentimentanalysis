@@ -108,11 +108,19 @@ with st.sidebar:
 
     st.caption("Dibuat untuk kebutuhan analisis sentimen aplikasi perpajakan.")
 
+col1, col2 = st.columns([1, 8]) # Angka 1 dan 8 menentukan lebar kolom (logo lebih kecil dari judul)
 
+with col1:
+    # Memanggil logo dengan ukuran yang pas
+    st.image("logo.png", width=70) 
+
+with col2:
+    # Menggeser judul agar sejajar dengan logo
+    st.title("Analisis Sentimen M-Pajak")
+
+st.write("Dashboard ini memprediksi apakah ulasan pengguna bersifat **Positif, Negatif, atau Netral**.")
 
 # --- MAIN UI ---
-
-st.title("📊 Sentimen Analisis M-Pajak")
 
 st.write("Dashboard ini memprediksi apakah ulasan pengguna bersifat **Positif, Negatif, atau Netral**.")
 
