@@ -286,7 +286,7 @@ with st.sidebar:
     st.info("Model ini digunakan untuk menganalisis sentimen pengguna aplikasi M-Pajak secara real-time.")
     st.markdown("- **Algoritma:** LinearSVC (Calibrated)")
     st.markdown("- **Feature Extraction:** TF-IDF Vectorizer")
-    st.markdown("- **Dataset:** 5,500 Ulasan Terbaru (Scraping Google Play Store")
+    st.markdown("- **Dataset:** 5,500 Ulasan Terbaru (Scraping Google Play Store)")
     st.markdown("- **Akurasi:** 81.03%")
 
 # Main Area
