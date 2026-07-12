@@ -116,8 +116,6 @@ with col2:
     # Menggeser judul agar sejajar dengan logo
     st.title("Analisis Sentimen M-Pajak")
 
-st.write("Dashboard ini memprediksi apakah ulasan pengguna bersifat **Positif, Negatif, atau Netral**.")
-
 # --- MAIN UI ---
 
 st.write("Dashboard ini memprediksi apakah ulasan pengguna bersifat **Positif, Negatif, atau Netral**.")
