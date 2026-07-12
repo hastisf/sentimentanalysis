@@ -283,11 +283,25 @@ with col2:
 # Sidebar
 with st.sidebar:
     st.header("📌 Informasi Model")
-    st.info("Model ini digunakan untuk menganalisis sentimen pengguna aplikasi M-Pajak secara real-time.")
+    st.info("Analisis sentimen real-time untuk ulasan M-Pajak.")
+    
     st.markdown("- **Algoritma:** LinearSVC (Calibrated)")
     st.markdown("- **Feature Extraction:** TF-IDF Vectorizer")
-    st.markdown("- **Dataset:** 5,500 Ulasan Terbaru (Scraping Google Play Store)")
+    st.markdown("- **Dataset:** 5,500 Ulasan Terbaru (Google Play Store)")
     st.markdown("- **Akurasi:** 81.03%")
+    
+    with st.expander("💡 Mengapa Model Ini?"):
+        st.write("""
+        *   **TF-IDF:** Optimal untuk pembobotan kata penting dan peredaman *noise*.
+        *   **LinearSVC:** Efektif untuk teks berdimensi tinggi, menyeimbangkan **kecepatan prediksi** dan **akurasi**.
+        *   **Calibration:** Memberikan *Probability Score* untuk transparansi tingkat keyakinan model.
+        
+        *Solusi ini dipilih karena ringan dan optimal untuk kebutuhan real-time.*
+        """)
+        
+st.markdown("---") # Garis pembatas
+st.markdown("### 👨‍💻 Developed by:")
+st.caption("Hasti Sri Fatmawati")        
 
 # Main Area
 st.write("Dashboard ini memprediksi apakah ulasan pengguna bersifat **Positif, Negatif, atau Netral**.")
