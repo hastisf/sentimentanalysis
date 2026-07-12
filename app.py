@@ -299,10 +299,6 @@ with st.sidebar:
         *Solusi ini dipilih karena ringan dan optimal untuk kebutuhan real-time.*
         """)
         
-st.markdown("---") # Garis pembatas
-st.markdown("### 👨‍💻 Developed by:")
-st.caption("Hasti Sri Fatmawati")        
-
 # Main Area
 st.write("Dashboard ini memprediksi apakah ulasan pengguna bersifat **Positif, Negatif, atau Netral**.")
 user_input = st.text_area("Tulis ulasan aplikasi di sini:", placeholder="Contoh: Login lemot banget, apk ga bisa dibuka")
@@ -333,3 +329,9 @@ if st.button("Analisis Sentimen"):
             st.success(f"Final Input: `{final_txt}`")
     else:
         st.warning("Silakan masukkan teks ulasan terlebih dahulu!")
+        
+# --- FOOTER ---
+st.markdown("---") # Garis pembatas tipis
+col_a, col_b = st.columns([8, 2]) # Membuat kolom dengan proporsi 8:2
+with col_b:
+    st.markdown("<p style='text-align: right; color: gray; font-size: 12px;'>© 2026 Hasti Sri Fatmawati</p>", unsafe_allow_html=True)
