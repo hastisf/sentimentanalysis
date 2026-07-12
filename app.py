@@ -84,8 +84,6 @@ model, tfidf = load_assets()
 
 with st.sidebar:
 
-    st.image("logo.png", width=150) # Pastikan file logo.png ada
-
     st.header("📌 Informasi Model")
 
     st.info("Model ini digunakan untuk menganalisis sentimen pengguna aplikasi M-Pajak secara real-time.")
