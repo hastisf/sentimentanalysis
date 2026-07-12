@@ -1,109 +1,44 @@
 import streamlit as st
-
 import joblib
-
+import nltk
 from Sastrawi.Stemmer.StemmerFactory import StemmerFactory
 
-
-
-# --- Setup ---
-
-st.set_page_config(page_title="Analisis Sentimen M-Pajak", page_icon="logo.png", layout="wide")
-
+# 1. Setup Preprocessing (HARUS SAMA DENGAN SAAT TRAINING)
+nltk.download('stopwords')
+from nltk.corpus import stopwords
+stop_words = set(stopwords.words('indonesian'))
 factory = StemmerFactory()
-
 stemmer = factory.create_stemmer()
 
+def preprocess_text(text):
+    text = str(text).lower()
+    # Tambahkan custom stopword jika ada saat training
+    tokens = [w for w in text.split() if w not in stop_words]
+    return stemmer.stem(' '.join(tokens))
 
-
-# Load Model
-
+# 2. Load Model & Vectorizer
 model = joblib.load('svm_calibrated_model.pkl')
-
 tfidf = joblib.load('tfidf.pkl')
 
+# 3. UI Streamlit
+st.title("Analisis Sentimen M-Pajak")
+st.write("Masukkan ulasan aplikasi untuk mengetahui sentimennya.")
 
+user_input = st.text_input("Tulis ulasan Anda di sini:")
 
-# --- Sidebar (Input Area) ---
-
-with st.sidebar:
-
-    st.header("Input Data")
-
-    user_input = st.text_area("Masukkan ulasan di sini:", height=150)
-
-    tombol_analisis = st.button("Analisis Sentimen")
-
-    st.markdown("---")
-
-    st.caption("Proyek Analisis Sentimen M-Pajak")
-
-
-
-# --- Main Area ---
-
-st.title("📊 Analisis Sentimen M-Pajak")
-
-st.write("Pantau sentimen pengguna secara real-time melalui dashboard cerdas.")
-
-
-
-if tombol_analisis:
-
+if st.button("Analisis Sentimen"):
     if user_input:
-
-        # 1. Prediksi
-
-        clean_text = user_input.lower() # Sederhanakan preprocessing untuk contoh
-
+        # Preprocessing
+        clean_text = preprocess_text(user_input)
+        # Vectorizing
         text_vec = tfidf.transform([clean_text])
-
+        # Prediction
         prediction = model.predict(text_vec)[0]
-
         confidence = model.predict_proba(text_vec).max() * 100
-
         
-
-        # 2. Visualisasi Dashboard
-
-        col1, col2 = st.columns(2)
-
-        
-
-        # Tampilkan status warna
-
-        warna = "red" if prediction == "negative" else "green"
-
-        col1.metric("Sentimen", prediction.upper())
-
-        col2.metric("Confidence Score", f"{confidence:.2f}%")
-
-        
-
-        # Pesan status
-
-        if prediction == "negative":
-
-            st.error("⚠️ Model mendeteksi keluhan. Perlu perhatian khusus.")
-
-        else:
-
-            st.success("✅ Model mendeteksi sentimen positif.")
-
-            
-
-        # 3. Transparansi (Traceability)
-
-        with st.expander("Lihat Detail Pemrosesan"):
-
-            st.write("Input: ", user_input)
-
-            st.write("Stemmed: ", stemmer.stem(user_input))
-
-            st.info("Model menggunakan SVM + TF-IDF Vectorizer")
-
-            
-
+        # Display
+        st.subheader("Hasil Prediksi:")
+        st.success(f"Sentimen: {prediction}")
+        st.info(f"Confidence Score: {confidence:.2f}%")
     else:
-
-        st.warning("Silakan masukkan teks ulasan terlebih dahulu!")
+        st.warning("Silakan masukkan teks terlebih dahulu!")
