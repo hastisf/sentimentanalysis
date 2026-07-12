@@ -96,7 +96,7 @@ with st.sidebar:
 
     st.markdown("- **Feature Extraction:** TF-IDF Vectorizer")
 
-    st.markdown("- **Dataset:** 5,500 Ulasan (Scraping Google PlayStore)")
+    st.markdown("- **Dataset:** 5,500 Ulasan Terbaru (Scraping Google PlayStore)")
 
     st.markdown("- **Akurasi:** 81.03%")
 
