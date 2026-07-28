@@ -331,7 +331,42 @@ if st.button("Analisis Sentimen"):
         st.warning("Silakan masukkan teks ulasan terlebih dahulu!")
         
 # --- FOOTER ---
-st.markdown("---") # Garis pembatas tipis
-col_a, col_b = st.columns([8, 2]) # Membuat kolom dengan proporsi 8:2
-with col_b:
-    st.markdown("<p style='text-align: right; color: gray; font-size: 12px;'>© 2026 Hasti Sri Fatmawati</p>", unsafe_allow_html=True)
+st.markdown("""
+<hr>
+
+<div style="
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:8px 0;
+font-size:14px;
+color:#6c757d;
+flex-wrap:wrap;
+">
+
+<div>
+© 2026 <b>Hasti Sri Fatmawati</b>
+</div>
+
+<div>
+<a href="https://www.linkedin.com/in/hasti-sri-fatmawati-361b49417/"
+target="_blank">
+
+<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linkedin/linkedin-original.svg"
+width="22">
+
+</a>
+</div>
+
+<div>
+<a href="https://github.com/hastisf"
+target="_blank">
+
+<img src="https://cdn.simpleicons.org/github/181717"
+width="24">
+
+</a>
+</div>
+
+</div>
+""", unsafe_allow_html=True)
