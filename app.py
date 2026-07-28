@@ -330,19 +330,41 @@ with st.sidebar:
     st.header("📌 Informasi Model")
     st.info("Analisis sentimen real-time untuk ulasan M-Pajak.")
     
-    st.markdown("- **Algoritma:** LinearSVC (Calibrated)")
-    st.markdown("- **Feature Extraction:** TF-IDF Vectorizer")
-    st.markdown("- **Dataset:** 5,500 Ulasan Terbaru (Google Play Store)")
-    st.markdown("- **Akurasi:** 81.03%")
-    
-    with st.expander("💡 Mengapa Model Ini?"):
-        st.write("""
-        *   **TF-IDF:** Optimal untuk pembobotan kata penting dan peredaman *noise*.
-        *   **LinearSVC:** Efektif untuk teks berdimensi tinggi, menyeimbangkan **kecepatan prediksi** dan **akurasi**.
-        *   **Calibration:** Memberikan *Probability Score* untuk transparansi tingkat keyakinan model.
-        
-        *Solusi ini dipilih karena ringan dan optimal untuk kebutuhan real-time.*
-        """)
+st.sidebar.markdown("## 📌 Informasi Model")
+
+st.sidebar.markdown("""
+Analisis sentimen **real-time** untuk ulasan aplikasi **M-Pajak**.
+
+**🧠 Pelabelan Dataset**
+- IndoBERT (`mdhugol/indonesia-bert-sentiment-classification`)
+
+**🤖 Model Klasifikasi**
+- LinearSVC (Calibrated)
+
+**📝 Feature Extraction**
+- TF-IDF Vectorizer
+
+**📊 Dataset**
+- 5.500 ulasan Google Play Store
+
+**📈 Performa Model**
+- Accuracy : **84.88%**
+- F1 Score : **82.93%**
+""")
+
+st.sidebar.markdown("---")
+
+st.sidebar.markdown("## 💡 Mengapa Model Ini?")
+
+st.sidebar.info("""
+**IndoBERT** digunakan untuk menghasilkan label sentimen yang lebih akurat karena mampu memahami konteks bahasa Indonesia, termasuk kalimat yang mengandung negasi dan makna implisit.
+
+**TF-IDF** digunakan untuk mengubah teks menjadi representasi numerik yang efisien sehingga dapat diproses oleh model machine learning.
+
+**LinearSVC (Calibrated)** dipilih sebagai model akhir karena memperoleh **F1 Score tertinggi** dibandingkan model lain pada proses evaluasi. Selain memiliki performa yang baik pada data teks, model ini juga ringan dan memberikan prediksi yang cepat sehingga sesuai untuk aplikasi analisis sentimen secara **real-time**.
+
+**Calibration** digunakan untuk menghasilkan **Probability Score** sehingga pengguna dapat melihat tingkat keyakinan dari setiap hasil prediksi.
+""")
         
 # Main Area
 st.write("Dashboard ini memprediksi apakah ulasan pengguna bersifat **Positif, Negatif, atau Netral**.")
