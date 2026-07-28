@@ -9,13 +9,56 @@ import string
 st.set_page_config(page_title="Analisis Sentimen M-Pajak", page_icon="logo.png", layout="wide")
 
 # --- SETUP RESOURCES ---
-nltk.download('stopwords', quiet=True)
-from nltk.corpus import stopwords
-stop_words = set(stopwords.words('indonesian'))
+factory = StopWordRemoverFactory()
 
-# Custom Stopwords
-custom_stopwords = {'yg','aja','nya','sih','nih','dong','lah','mah','kok','gak','ga','nggak','udah','sdh'}
-stop_words.update(custom_stopwords)
+stopword_id = set(factory.get_stop_words())
+
+# CUSTOM STOPWORDS
+custom_stopwords = {
+    'ada', 'adalah', 'agar', 'agak', 'ah', 'aja', 'akan', 'aku',
+    'alhamdulillah', 'anda', 'astaga', 'atau','bagi', 'bahwa', 'bang',
+    'biar', 'bro', 'btw', 'bu', 'cuma', 'dan', 'dari', 'deh','dia', 'di',
+    'dll', 'dong', 'dulu', 'eh','gini', 'gitu','gue', 'gua', 'guys', 'gw',
+    'haha', 'hahaha', 'halo', 'hehe','hanya', 'hingga', 'hmm','ibu',
+    'ini', 'intinya','itu', 'iya','jadi', 'juga','kak','kami', 'kamu',
+    'kan','karena','ke', 'kembali', 'kemudian', 'kita','kok', 'lah',
+    'lainnya', 'lebih', 'loh','mana', 'mas', 'mba','memang', 'mereka',
+    'min', 'mu','nih', 'nya','oleh','orang','pak','pada', 'para',
+    'pernah', 'please', 'plis', 'pls','pokoknya','pun','saja','sama',
+    'sampai','sana','saya','sebagai','sebelum','sebuah','sedang',
+    'sekarang','segala','semoga','semua','sendiri','seperti',
+    'setelah','setiap','si','sih','sudah','supaya','tadi','tahap',
+    'tapi','telah','tentang','terhadap','tersebut','toh','tuh',
+    'untuk','via','wah','weh','woi','woy','ya','yah','yakni',
+    'yang','yg','bos','boss','gaes','cik','paman','wkwk',
+    'wkwkwk','wkwkwkwkw','ekwkw','ckckck'
+
+}
+
+# IMPORTANT WORDS - tidak boleh ikut terhapus
+important_words = {
+    'tidak','tak','bukan','error','eror','bug','crash','force',
+    'close','forceclose','force close', 'loading','lemot','lag','gagal',
+    'rusak','jelek','buruk','parah','busuk','ampas','tolol','sampah',
+    'bagus', 'mantap','membantu','cepat','mudah','login','logout',
+    'otp','password','akun','email','sms','whatsapp','npwp','nik',
+    'kk','efin','verifikasi','validasi','aktivasi','kode','server',
+    'sinkron','update','gangguan','maintenance','aplikasi','web',
+    'website','lama','lambat','timeout','kadaluarsa','expired',
+    'banget','amat','sangat','tolong','mohon','kenapa','bagaimana',
+    'baru','lagi','terus','malah','bisa', 'salah', 'blokir', 'bagus',
+
+}
+
+# Tidak hapus kata penting
+for word in important_words:
+    custom_stopwords.discard(word)
+
+# Buat stopword final
+stopword_final = set(stopword_id).union(custom_stopwords)
+
+# Hapus kata penting dari stopword
+stopword_final = stopword_final - important_words
 
 factory = StemmerFactory()
 stemmer = factory.create_stemmer()
@@ -218,7 +261,7 @@ slang_dict = {
     'wnwp' : 'npwp', 'x' : 'kali', 'y' : 'ya', 'yeeay' : 'yes', "ampaas":"ampas",
     'yok' : 'yuk', 'yutub' : 'yotube', 'yy' : 'ya', 'teros' : 'terus',"tolool":"tolol",
     "tololl":"tolol","okee":"oke","makasihh":"terima kasih",'veripikasi':'verifikasi',
-    'verikasi':'verifikasi', 'periv':'verifikasi', 'ngelogin':'login',
+    'verikasi':'verifikasi', 'periv':'verifikasi', 'ngelogin':'login', 'apl1kas1' : 'aplikasi',
     'garespon':'tidak respon', 'garespons':'tidak respon', 'gkmasuk':'tidak masuk',
     'gabukak':'tidak buka', 'gabuka':'tidak buka', 'gklogin':'tidak login',
     'gamasuk':'tidak masuk','gamasukin':'tidak masuk', 'gkbisalogin':'tidak bisa login',
@@ -256,7 +299,7 @@ def get_full_pipeline(text):
     # 4. Slang Normalization
     s4 = [slang_dict.get(w, w) for w in s3]
     # 5. Stopword Removal
-    s5 = [w for w in s4 if w not in stop_words]
+    s5 = [w for w in s4 if w not in stopword_final]
     # 6. Stemming
     s6 = [stemmer.stem(w) for w in s5]
     
