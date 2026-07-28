@@ -4,6 +4,7 @@ import joblib
 import nltk
 import re
 import string
+import os
 
 from Sastrawi.Stemmer.StemmerFactory import StemmerFactory
 from Sastrawi.StopWordRemover.StopWordRemoverFactory import StopWordRemoverFactory
@@ -65,6 +66,16 @@ stopword_final = stopword_final - important_words
 
 factory = StemmerFactory()
 stemmer = factory.create_stemmer()
+
+stemming_exceptions = {
+    "lemot": "lemot",
+    "terus": "terus"
+}
+
+def custom_stem_word(word):
+    if word in stemming_exceptions:
+        return stemming_exceptions[word]
+    return stemmer.stem(word)
 
 # Kamus Slang (Lengkap sesuai input Anda)
 slang_dict = {
@@ -304,7 +315,7 @@ def get_full_pipeline(text):
     # 5. Stopword Removal
     s5 = [w for w in s4 if w not in stopword_final]
     # 6. Stemming
-    s6 = [stemmer.stem(w) for w in s5]
+    s6 = [custom_stem_word(w) for w in s5]
     
     final_text = ' '.join(s6)
     return s1, s2, s3, s4, s5, s6, final_text
