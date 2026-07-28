@@ -329,7 +329,8 @@ with col2:
 with st.sidebar:
     st.header("📌 Informasi Model")
     st.info("Analisis sentimen real-time untuk ulasan M-Pajak.")
-    
+
+    st.markdown("""
 **Metode Pelabelan**
 - IndoBERT (`mdhugol/indonesia-bert-sentiment-classification`)
 
