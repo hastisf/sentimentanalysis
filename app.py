@@ -330,33 +330,32 @@ with st.sidebar:
     st.header("📌 Informasi Model")
     st.info("Analisis sentimen real-time untuk ulasan M-Pajak.")
     
-**🧠 Pelabelan Dataset**
+**Metode Pelabelan**
 - IndoBERT (`mdhugol/indonesia-bert-sentiment-classification`)
 
-**🤖 Model Klasifikasi**
+**Model Klasifikasi**
 - LinearSVC (Calibrated)
 
-**📝 Feature Extraction**
+**Ekstraksi Fitur**
 - TF-IDF Vectorizer
 
-**📊 Dataset**
+**Dataset**
 - 5.500 ulasan Google Play Store
 
-**📈 Performa Model**
+**Performa Model**
 - Accuracy : **84.88%**
 - F1 Score : **82.93%**
 """)
 
-st.sidebar.markdown("---")
+    st.markdown("---")
 
-st.sidebar.info("""
-st.sidebar.markdown("## 💡 Mengapa Model Ini?")
+    st.markdown("### Alasan Pemilihan Model")
 
-st.sidebar.info("""
-- **IndoBERT** → Pelabelan sentimen otomatis.
-- **TF-IDF** → Representasi fitur teks.
-- **LinearSVC (Calibrated)** → F1 Score tertinggi (82,93%) dengan prediksi yang cepat.
-- **Calibration** → Menampilkan Probability Score sebagai tingkat keyakinan prediksi.
+    st.info("""
+- **IndoBERT** digunakan untuk pelabelan sentimen otomatis.
+- **TF-IDF** digunakan sebagai representasi fitur teks.
+- **LinearSVC (Calibrated)** dipilih karena memperoleh **F1 Score** tertinggi (82,93%).
+- **Calibration** menghasilkan *Probability Score* untuk menunjukkan tingkat keyakinan prediksi.
 """)
         
 # Main Area
