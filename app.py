@@ -1,9 +1,11 @@
 import streamlit as st
 import joblib
 import nltk
-from Sastrawi.Stemmer.StemmerFactory import StemmerFactory
 import re
 import string
+
+from Sastrawi.Stemmer.StemmerFactory import StemmerFactory
+from Sastrawi.StopWordRemover.StopWordRemoverFactory import StopWordRemoverFactory
 
 # Konfigurasi Page
 st.set_page_config(page_title="Analisis Sentimen M-Pajak", page_icon="logo.png", layout="wide")
