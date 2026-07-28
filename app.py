@@ -75,7 +75,7 @@ slang_dict = {
     'ampee':'sampai','ampe': 'sampai','ampas': 'ampas',
     'ampaslah': 'ampas', 'ampunnn':'ampun','ancur': 'hancur',
     'anj': 'anjing','anjengggg': 'anjing', 'anjg':'anjing','anjir': 'anjing',
-    'anjggg': 'anjing',
+    'anjggg': 'anjing', 'lemot' : 'lemot',
     'anjr':'anjing','anjrit': 'anjing', 'anying': 'anjing',
     'anyinh': 'anjing','anyingg': 'anjing','anjim' : 'anjing',
     'anjay' : 'anjing', 'anjr' : 'anjing', 'anying' : 'anjing',
@@ -336,7 +336,7 @@ model_results = pd.DataFrame({
         "Random Forest",
         "LinearSVC (Selected)",
         "Naive Bayes",
-        "AdaBoost"
+        "ADABoost"
     ],
     "Accuracy": [
         "84.49%",
