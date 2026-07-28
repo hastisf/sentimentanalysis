@@ -325,6 +325,36 @@ with col1:
 with col2:
     st.title("Analisis Sentimen M-Pajak")
 
+# ==========================
+# MODEL EVALUATION RESULTS
+# ==========================
+model_results = pd.DataFrame({
+    "Model": [
+        "Logistic Regression",
+        "Decision Tree",
+        "Random Forest",
+        "LinearSVC (Selected)",
+        "Naive Bayes",
+        "AdaBoost"
+    ],
+    "Accuracy": [
+        "84.49%",
+        "81.82%",
+        "85.57%",
+        "84.88%",
+        "82.61%",
+        "81.72%"
+    ],
+    "F1 Score": [
+        "80.73%",
+        "75.70%",
+        "82.86%",
+        "82.93%",
+        "76.10%",
+        "74.50%"
+    ]
+})
+
 # Sidebar
 with st.sidebar:
     st.header("📌 Informasi Model")
@@ -358,6 +388,22 @@ with st.sidebar:
 - **LinearSVC (Calibrated)** dipilih karena memperoleh **F1 Score** tertinggi (82,93%).
 - **Calibration** menghasilkan *Probability Score* untuk menunjukkan tingkat keyakinan prediksi.
 """)
+
+    st.markdown("---")
+
+    with st.expander("📊 Hasil Evaluasi Model"):
+
+        st.write(
+            "Tabel berikut menampilkan perbandingan performa enam algoritma klasifikasi "
+            "yang dievaluasi menggunakan dataset yang telah diberi label oleh **IndoBERT**."
+        )
+
+        st.dataframe(model_results, use_container_width=True)
+
+        st.caption(
+            "LinearSVC dipilih sebagai model akhir karena memperoleh F1 Score tertinggi pada proses evaluasi."
+        )
+
         
 # Main Area
 st.write("Dashboard ini memprediksi apakah ulasan pengguna bersifat **Positif, Negatif, atau Netral**.")
