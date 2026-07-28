@@ -256,7 +256,9 @@ LinkedIn:
 GitHub:
 > *https://github.com/hastisf/*
 
-Live Demo : https://mpajak-sentiment-analysis.streamlit.app/
+Live Demo:
+> *https://mpajak-sentiment-analysis.streamlit.app/*
+
 ---
 
 ⭐ If you find this project useful, consider giving it a **Star** on GitHub.
