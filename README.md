@@ -230,7 +230,6 @@ streamlit run app.py
 # 💡 Future Improvements
 
 - Fine-tuning IndoBERT for sentiment classification.
-- Explainable AI using SHAP/LIME.
 - Automatic visualization dashboard.
 - Topic Modeling to identify major user complaints.
 - Real-time sentiment monitoring from Google Play reviews.
